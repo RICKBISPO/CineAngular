@@ -1,0 +1,20 @@
+<app-search-bar (searchedMovies)="loadSearchedMovies($event)"></app-search-bar>
+
+<div class="mt-[16px] ml-[46px] mr-[54px] py-[33px] px-[40px] bg-white rounded-[12px]">
+    <div class="grid grid-cols-4 justify-items-center gap-[25px]">
+
+        @for (item of loadContent(); track $index) {
+            <div class="w-full"> 
+                <app-card-movie [movieId]="item.id"
+                    [movieTitle]="item.title" 
+                    [movieDescription]="item.description" 
+                    [movieImg]="item.img" 
+                    [movieIcon]="item.icon">
+                </app-card-movie>
+            </div>
+        }
+       
+    </div>
+</div>
+
+<app-see-more-button (click)="loadMore()"></app-see-more-button>

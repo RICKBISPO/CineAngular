@@ -1,0 +1,20 @@
+<div>
+    <div>
+        <a [routerLink]="'/detalhesFilme/' + movieId">
+            <img [src]="movieImg" class="rounded-[10px] w-full h-[50%]" alt="img-movie">
+        </a>
+    </div>
+    <div class="mt-[13px]">
+        <div>
+            <a [routerLink]="'/detalhesFilme/' + movieId">
+                <h4 class="font-semibold text-[24px]">{{ movieTitle }}</h4>
+            </a>
+        </div>
+        <div class="flex justify-end">
+            <img [src]="movieIcon" class="absolute w-[15.26px] h-[13.74px]" alt="icon-favi">
+        </div>
+        <div class="mt-[16.04px] mb-[20.76px] text-[16px]">
+            <p>{{ movieDescription }}</p>
+        </div>
+    </div>
+</div>
