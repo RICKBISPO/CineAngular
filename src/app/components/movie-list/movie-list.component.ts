@@ -37,7 +37,7 @@ export class MovieListComponent {
   loadMore() {
     this.breakpoint += 8;
     this.loadContent();
-  }
+  } 
 
   loadSearchedMovies(searchedMovies: Array<Movie>) {
     this.searchedMovies = searchedMovies;

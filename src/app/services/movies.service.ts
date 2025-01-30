@@ -47,16 +47,22 @@ export class MoviesService {
     if (breakpoint === undefined) {
       return this.movies;
     }
-    return this.movies.filter((movie, index) => index < breakpoint);
+    return this.movies
+      .filter((movie, index) => index < breakpoint);
   }
 
   findById(id: number): Movie | undefined {
-    return this.movies.find((movie) => movie.id === id);
+    return this.movies
+      .find((movie) => movie.id === id);
   }
 
-  findByTitle(title: string): Array<Movie> {
-    return this.movies.filter((movie) =>
-      movie.title.toLowerCase().includes(title.toLowerCase()));
+  findByTitle(title: string, breakpoint?: number): Array<Movie> {
+    if (breakpoint === undefined) {
+      return this.movies
+        .filter((movie) => movie.title.toLowerCase().includes(title.toLowerCase()));
+    }
+    return this.movies
+      .filter((movie, index) => movie.title.toLowerCase().includes(title.toLowerCase()) && index < breakpoint);
   }
 
 }

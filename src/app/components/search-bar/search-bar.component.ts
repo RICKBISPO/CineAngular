@@ -13,6 +13,7 @@ export class SearchBarComponent {
 
   searchValue: string = "";
 
+  @Input() breakpoint = 0;
   @Output() searchedMovies = new EventEmitter<Array<Movie>>;
 
   constructor(private moviesService: MoviesService) { }
@@ -20,7 +21,7 @@ export class SearchBarComponent {
   searchMovies()  {
     if (this.searchValue !== "") {
       this.searchedMovies.emit(
-        this.moviesService.findByTitle(this.searchValue)
+        this.moviesService.findByTitle(this.searchValue, this.breakpoint)
       );
     } else {
       this.searchedMovies.emit(

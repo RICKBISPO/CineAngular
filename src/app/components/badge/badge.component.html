@@ -1,0 +1,9 @@
+<div class="h-full w-full flex items-center justify-center">
+    @if (img !== "") {
+        <img [src]="img" [class]="imgClass" alt="badge-img">
+        <span [class]="textClass">{{ text }}</span>
+    }
+    @else {
+        <p [class]="textClass">{{ text }}</p>
+    }
+</div>

@@ -2,10 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../../models/movie';
+import { BadgeComponent } from "../badge/badge.component";
 
 @Component({
   selector: 'app-details-card-movie',
-  imports: [],
+  imports: [BadgeComponent],
   templateUrl: './details-card-movie.component.html',
   styleUrl: './details-card-movie.component.scss'
 })
