@@ -2,17 +2,18 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-card-movie',
+  selector: 'app-movie-card',
   imports: [RouterLink],
-  templateUrl: './card-movie.component.html',
-  styleUrl: './card-movie.component.scss'
+  templateUrl: './movie-card.component.html',
+  styleUrl: './movie-card.component.scss'
 })
-export class CardMovieComponent {
+export class MovieCardComponent {
 
   @Input() movieId: number = 0;
   @Input() movieTitle: string = "";
   @Input() movieDescription: string = "";
   @Input() movieImg: string = "";
   @Input() movieIcon: string = "";
-
+  @Input() movieRouterLink: string = "";
+ 
 }

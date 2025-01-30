@@ -1,0 +1,33 @@
+<app-search-bar (searchedMovies)="loadSearchedMovies($event)"></app-search-bar>
+
+<div>
+
+    <div class="mt-[11px] ">
+        <span class="text-gray-500">{{ listedMovies }} Filmes Listados</span>
+    </div>
+    
+    <div class="mt-[16px] py-[33px] px-[40px] bg-white rounded-[12px]">
+        <div class="grid grid-cols-4 justify-items-center gap-[25px]">
+    
+            @for (item of movieList; track $index) {
+                <div class="w-full"> 
+                    <app-movie-card [movieId]="item.id"
+                        [movieTitle]="item.title" 
+                        [movieDescription]="item.description" 
+                        [movieImg]="item.img" 
+                        [movieIcon]="item.icon"
+                        movieRouterLink = "/movie/">
+                    </app-movie-card>
+                </div>
+            }
+           
+        </div>
+    </div>
+
+</div>
+
+<div class="my-[36px]">
+    <app-common-button (click)="loadMore()"></app-common-button>
+</div>
+
+

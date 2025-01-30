@@ -1,0 +1,12 @@
+<div class="flex items-center">
+    <img [src]="img" [class]="size" alt="profile">
+    @if (secondaryName !== "") {
+        <div class="flex flex-col">
+            <span class="ml-[8px] text-[24px] font-semibold">{{ primaryName }}</span>
+            <span class="ml-[8px] text-[20px]">{{ secondaryName }}</span>
+        </div>
+    }
+    @else {
+        <span class="ml-[8px] text-[20px]">{{ primaryName }}</span>
+    }
+</div>

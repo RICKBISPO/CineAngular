@@ -1,6 +1,22 @@
-<app-header-movies fullPagePath="Início - Filmes" headerTitle="Filmes"></app-header-movies>
+<div class="ml-[46px] mr-[54px]">
 
-<app-movies-box></app-movies-box>
+    <app-breadcrumb 
+    [pagePathDisable]="[
+        { path: 'Início', link: '/' }
+    ]"
+
+    [pagePathActive]="
+    { path: 'Filmes', link: '/movie' }
+    "
+    />
+
+    <div class="text-[36px] mt-[10px] font-bold">
+        Filmes
+    </div>
+
+    <app-movie-list></app-movie-list>
+    
+</div>
 
 
 

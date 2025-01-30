@@ -1,0 +1,13 @@
+<div class="mt-[41px]">
+    <div class="text-gray-600">
+        @for (item of pagePathDisable; track $index) {
+            <a [routerLink]="item.link">
+                <span class="hover:underline">{{ item.path }}</span>
+                <span> - </span>
+            </a>
+        }
+        <a [routerLink]="pagePathActive.link">
+            <span class="font-bold hover:underline">{{ pagePathActive.path }}</span>
+        </a>
+    </div>
+</div>

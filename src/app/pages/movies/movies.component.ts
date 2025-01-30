@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component';
-import { HeaderMoviesComponent } from '../../components/header-movies/header-movies.component';
-import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
-import { MoviesBoxComponent } from '../../components/movies-box/movies-box.component';
-import { SeeMoreButtonComponent } from '../../components/see-more-button/see-more-button.component';
+import { MovieListComponent } from "../../components/movie-list/movie-list.component";
+import { BreadcrumbComponent } from "../../components/breadcrumb/breadcrumb.component";
 
 @Component({
   selector: 'app-movies',
-  imports: [SidebarComponent, HeaderMoviesComponent, SearchBarComponent, MoviesBoxComponent, SeeMoreButtonComponent],
+  imports: [MovieListComponent, BreadcrumbComponent],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss'
 })

@@ -1,12 +1,13 @@
 <div>
+
     <div>
-        <a [routerLink]="'/detalhesFilme/' + movieId">
+        <a [routerLink]="movieRouterLink + movieId">
             <img [src]="movieImg" class="rounded-[10px] w-full h-[50%]" alt="img-movie">
         </a>
     </div>
     <div class="mt-[13px]">
         <div>
-            <a [routerLink]="'/detalhesFilme/' + movieId">
+            <a [routerLink]="movieRouterLink + movieId">
                 <h4 class="font-semibold text-[24px]">{{ movieTitle }}</h4>
             </a>
         </div>
@@ -17,4 +18,5 @@
             <p>{{ movieDescription }}</p>
         </div>
     </div>
+
 </div>

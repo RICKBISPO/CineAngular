@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../../models/movie';
@@ -9,39 +9,24 @@ import { Movie } from '../../models/movie';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
 
-  listedMovies: string = "";
   searchValue: string = "";
-  private movieList: Array<Movie>;
 
   @Output() searchedMovies = new EventEmitter<Array<Movie>>;
 
-  constructor(private moviesService: MoviesService) { 
-    this.movieList = moviesService.getMoviesList;
-  }
+  constructor(private moviesService: MoviesService) { }
 
-  ngOnInit(): void {
-      this.listedMovies = this.formatNumber(this.movieList.length);
-  }
-
-  searchMovies() {
-    const movies = this.movieList.filter((movie) => 
-        movie.title.toLowerCase().includes(this.searchValue.toLowerCase()));
-
-    if (this.searchValue.trim() !== "") {
-      this.searchedMovies.emit(movies);
+  searchMovies()  {
+    if (this.searchValue !== "") {
+      this.searchedMovies.emit(
+        this.moviesService.findByTitle(this.searchValue)
+      );
     } else {
-      this.searchedMovies.emit([]);
+      this.searchedMovies.emit(
+        new Array<Movie>
+      );
     }
-
-    this.listedMovies = this.formatNumber(movies.length);
-  }
-
-  private formatNumber(number: number): string {
-    return ("0" + number).split("")
-            .slice(-2)
-            .join("");
   }
 
 }
