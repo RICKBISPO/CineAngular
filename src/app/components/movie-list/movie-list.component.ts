@@ -1,53 +1,71 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Movie } from '../../models/movie';
 import { MoviesService } from '../../services/movies.service';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { MovieCardComponent } from "../movie-card/movie-card.component";
 import { CommonButtonComponent } from '../common-button/common-button.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-movie-list',
-  imports: [CommonButtonComponent, SearchBarComponent, MovieCardComponent],
+  imports: [CommonButtonComponent, MovieCardComponent, DatePipe],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss'
 })
-export class MovieListComponent {
+export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   movieList: Array<Movie> = new Array<Movie>;
-  breakpoint: number = 8;
-  searchedMovies: Array<Movie> = new Array<Movie>;
+  viewMovieList: Array<Movie> = new Array<Movie>;
+  page: number = 1;
   listedMovies: string = "";
- 
+
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit(): void {
-    this.loadContent();
-    this.setListedMovies(this.movieList.length);
+    this.moviesService.getPopularMovies(this.page).subscribe({
+      next: (res) => { 
+        this.movieList = res.results;
+        this.viewMovieList = this.movieList;
+        this.setListedMovies(this.movieList.length); 
+      }
+    });
   }
 
-  loadContent() {
-    if (!this.searchedMovies.length) {
-      this.movieList = this.moviesService.getMovies(this.breakpoint);
+  ngAfterViewInit(): void {
+    this.moviesService.searchedMoviesSubject$.subscribe({
+      next: (searchValue) => { 
+        if (searchValue !== "") {
+          this.viewMovieList = this.movieList
+            .filter((movie) => movie.title.toLowerCase().includes(searchValue.toLowerCase())); 
+        }
+        else {
+          this.viewMovieList = this.movieList;
+        }
+        this.setListedMovies(this.viewMovieList.length);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.moviesService.searchedMoviesSubject$.unsubscribe();
+  }
+
+  loadMoreMovies(): void {
+    this.page += 1;
+    this.moviesService.getPopularMovies(this.page).subscribe({
+      next: (res) => { 
+        this.movieList = [...this.movieList, ...res.results];
+        this.viewMovieList = this.movieList;
+        this.setListedMovies(this.movieList.length); 
+      }
+    });
+  }
+
+  setListedMovies(number: number): void {
+    if (number < 10) {
+      this.listedMovies = "0" + number;
     } else {
-      this.movieList = this.searchedMovies;
+      this.listedMovies = number.toString();
     }
-    this.setListedMovies(this.movieList.length);
-  }
-
-  loadMore() {
-    this.breakpoint += 8;
-    this.loadContent();
-  } 
-
-  loadSearchedMovies(searchedMovies: Array<Movie>) {
-    this.searchedMovies = searchedMovies;
-    this.loadContent();
-  }
-
-  setListedMovies(number: number) {
-    this.listedMovies = ("0" + number).split("")
-            .slice(-2)
-            .join("");
   }
 
 }

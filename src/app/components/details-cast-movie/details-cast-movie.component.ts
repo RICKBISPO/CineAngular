@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonButtonComponent } from "../common-button/common-button.component";
 import { AvatarComponent } from "../avatar/avatar.component";
+import { MovieDetails } from '../../models/movieDetails';
 
 @Component({
   selector: 'app-details-cast-movie',
@@ -9,5 +10,12 @@ import { AvatarComponent } from "../avatar/avatar.component";
   styleUrl: './details-cast-movie.component.scss'
 })
 export class DetailsCastMovieComponent {
+
+  modalToggle: boolean = false;
+  @Input() movieDetails!: MovieDetails;
+
+  toggleModal(): void {
+    this.modalToggle = !this.modalToggle;
+  }
 
 }

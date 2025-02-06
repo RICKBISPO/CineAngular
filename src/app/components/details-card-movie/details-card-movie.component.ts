@@ -1,30 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MoviesService } from '../../services/movies.service';
-import { Movie } from '../../models/movie';
 import { BadgeComponent } from "../badge/badge.component";
+import { MovieDetails } from '../../models/movieDetails';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-details-card-movie',
-  imports: [BadgeComponent],
+  imports: [BadgeComponent, DatePipe],
   templateUrl: './details-card-movie.component.html',
   styleUrl: './details-card-movie.component.scss'
 })
-export class DetailsCardMovieComponent implements OnInit {
+export class DetailsCardMovieComponent {
   
-  movieId = 0;
-  movie: Movie | undefined;
-  movieImg = "";
+  @Input() movieDetails!: MovieDetails;
 
-  constructor(private route: ActivatedRoute, private moviesService: MoviesService) { }
-
-  ngOnInit(): void {
-    this.movieId = Number(this.route.snapshot.paramMap.get('id'));
-    this.movie = this.moviesService.findById(this.movieId); 
-
-    if (this.movie !== undefined) {
-      this.movieImg = this.movie.img;
-    }
+  getMovieDirecting(): string {
+    let directing = "";
+    this.movieDetails.credits.crew.forEach((crew) => {
+      if (crew.known_for_department === "Directing") {
+        directing = crew.original_name;
+      }
+    });
+    return directing;
   }
 
 }

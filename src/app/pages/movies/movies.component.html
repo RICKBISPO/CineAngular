@@ -6,13 +6,15 @@
     ]"
 
     [pagePathActive]="
-    { path: 'Filmes', link: '/movie' }
+    { path: 'Filmes', link: '/movies' }
     "
     />
 
-    <div class="text-[36px] mt-[10px] font-bold">
+    <div class="text-[36px] mt-[10px] dark:text-white font-bold">
         Filmes
     </div>
+
+    <app-search-bar></app-search-bar>
 
     <app-movie-list></app-movie-list>
     

@@ -7,20 +7,20 @@
     ]"
 
     [pagePathActive]="
-    { path: movieTitle, link: '/movie' }
+    { path: movieDetails.movie.title, link: '/movie/' + movieDetails.movie.id}
     "
     />
 
-    <div class="text-[36px] mt-[10px] font-bold">
-        {{ movieTitle }}
+    <div class="text-[32px] font-bold py-[1%] dark:text-white">
+        {{ movieDetails.movie.title }}
     </div>
 
-    <div class="grid grid-cols-2 grid-rows-3 gap-8 mt-[16px] mb-[40px]">
-        <app-details-card-movie class="row-span-3"></app-details-card-movie>
+    <div class="grid lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1 auto-rows-auto gap-6">
+        <app-details-card-movie class="row-span-2" [movieDetails]="movieDetails"></app-details-card-movie>
 
-        <app-details-cast-movie class="row-span-2"></app-details-cast-movie>
-        
-        <app-details-overview-movie class="row-span-1"></app-details-overview-movie>    
+        <app-details-cast-movie class="lg:col-span-2 md:col-span-1" [movieDetails]="movieDetails"></app-details-cast-movie>
+    
+        <app-details-overview-movie class="lg:col-span-2 md:col-span-1" [movieDetails]="movieDetails"></app-details-overview-movie>
     </div>
 
 </div>

@@ -1,68 +1,76 @@
 import { Injectable } from '@angular/core';
 import { Movie } from '../models/movie';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../../environments/environment.development';
+import { Credits } from '../models/credits';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
 
-  private movies: Array<Movie> = [];
+  private apiUrl = 'https://api.themoviedb.org/3/movie';
+  searchedMoviesSubject$: BehaviorSubject<string> = new BehaviorSubject<string>("");
 
-  constructor() { 
-    this.movies = [{ id: 1, img: "/assets/mega-tubarao.jpg", title: "Megatubarão 2", description: "02 de agosto de 2023", icon: "/assets/favi-heart-icon.png" },
+  constructor(private http: HttpClient) {}
 
-      { id: 2, img: "/assets/elementos.jpg", title: "Elementos", description: "14 de junho de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 3, img: "/assets/stone.jpg", title: "Agente Stone", description: "09 de agosto de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 4, img: "/assets/indiana-jones.jpg", title: "Indiana Jones", description: "28 de junho de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 5, img: "/assets/barbie.jpg", title: "Barbie", description: "19 de julho de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 6, img: "/assets/aranha.jpg", title: "Homem Aranha", description: "31 de maio de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 7, img: "/assets/flash.jpg", title: "The Flash", description: "13 de junho de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 8, img: "/assets/transformers.jpg", title: "Transformers", description: "06 de agosto de 2023", icon: "/assets/favi-heart-icon.png" },
+  private defaultHeaders = {
+    Authorization: 'Bearer ' + environment.apiKey,
+  };
 
-      { id: 9, img: "/assets/mega-tubarao.jpg", title: "Megatubarão 2", description: "02 de agosto de 2023", icon: "/assets/favi-heart-icon.png" },
+  public getPopularMovies(
+    page: number
+  ): Observable<{ results: Movie[] }> {
 
-      { id: 10, img: "/assets/elementos.jpg", title: "Elementos", description: "14 de junho de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 11, img: "/assets/stone.jpg", title: "Agente Stone", description: "09 de agosto de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 12, img: "/assets/indiana-jones.jpg", title: "Indiana Jones", description: "28 de junho de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 13, img: "/assets/barbie.jpg", title: "Barbie", description: "19 de julho de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 14, img: "/assets/aranha.jpg", title: "Homem Aranha", description: "31 de maio de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 15, img: "/assets/flash.jpg", title: "The Flash", description: "13 de junho de 2023", icon: "/assets/favi-heart-icon.png" },
-      
-      { id: 16, img: "/assets/transformers.jpg", title: "Transformers", description: "06 de agosto de 2023", icon: "/assets/favi-heart-icon.png" }
-    ]
+    const params = new HttpParams()
+      .set('language', 'pt-BR')
+      .set('page', page);
+
+    return this.http.get<{ results: Movie[] }>(`${this.apiUrl}/popular`, {
+      params: params,
+      headers: this.defaultHeaders,
+    });
   }
 
-  getMovies(breakpoint?: number): Array<Movie> {
-    if (breakpoint === undefined) {
-      return this.movies;
-    }
-    return this.movies
-      .filter((movie, index) => index < breakpoint);
+  public getMovieDetails(
+    id: number
+  ): Observable<Movie> {
+    
+      const params = new HttpParams().set('language', 'pt-BR');
+    
+      return this.http.get<Movie>(`${this.apiUrl}/${id}`, {
+        params: params,
+        headers: this.defaultHeaders,
+      }).pipe(
+        map(res => ({
+          id: res.id,
+          poster_path: res.poster_path,
+          title: res.title,
+          release_date: res.release_date,
+          vote_average: res.vote_average,
+          overview: res.overview,
+          genres: res.genres
+        } as Movie))
+      );
   }
 
-  findById(id: number): Movie | undefined {
-    return this.movies
-      .find((movie) => movie.id === id);
-  }
-
-  findByTitle(title: string, breakpoint?: number): Array<Movie> {
-    if (breakpoint === undefined) {
-      return this.movies
-        .filter((movie) => movie.title.toLowerCase().includes(title.toLowerCase()));
-    }
-    return this.movies
-      .filter((movie, index) => movie.title.toLowerCase().includes(title.toLowerCase()) && index < breakpoint);
+  public getMovieCredits(
+    id: number
+  ): Observable<Credits> { 
+  
+    const params = new HttpParams()
+      .set('language', 'pt-BR');
+  
+    return this.http.get<Credits>(`${this.apiUrl}/${id}/credits`, {
+      params: params,
+      headers: this.defaultHeaders,
+    }).pipe(
+      map(res => ({
+        cast: res.cast,
+        crew: res.crew
+      }) as Credits)
+    );
   }
 
 }

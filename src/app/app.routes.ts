@@ -3,6 +3,7 @@ import { MoviesComponent } from './pages/movies/movies.component';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './pages/layout/layout.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
     
@@ -24,6 +25,11 @@ export const routes: Routes = [
                 component: MovieDetailsComponent
             }
         ]
+    },
+
+    {
+        path: '**',
+        component: NotFoundComponent,
     }
 
 ];

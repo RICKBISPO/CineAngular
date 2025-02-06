@@ -1,6 +1,3 @@
-<div class="flex justify-center">
-    <button class="flex items-center bg-blue-600 hover:bg-blue-900 text-white font-bold py-3 px-6 rounded cursor-pointer">
-        Ver mais
-        <img src="/assets/arrow-forward-outline.png" class="ml-[19px] w-[20px] h-[20px]" alt="see-more">
-    </button>
-</div>
+<button [class]="buttonClass" class="flex items-center justify-center rounded-[6px] cursor-pointer">
+    <ng-content select="[commonButton]"></ng-content>
+</button>

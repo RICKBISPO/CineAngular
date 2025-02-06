@@ -1,23 +1,25 @@
-<app-search-bar (searchedMovies)="loadSearchedMovies($event)" [breakpoint]="breakpoint"></app-search-bar>
-
 <div>
 
     <div class="mt-[11px] ">
-        <span class="text-gray-500">{{ listedMovies }} Filmes Listados</span>
+        <span class="text-gray-500 dark:text-gray-50">{{ listedMovies }} Filme(s) Listado(s)</span>
     </div>
     
-    <div class="mt-[16px] py-[33px] px-[40px] bg-white rounded-[12px]">
-        <div class="grid grid-cols-4 justify-items-center gap-[25px]">
+    <div class="mt-[16px] py-[33px] px-[40px] bg-white dark:bg-gray-800 dark:text-white rounded-[12px]">
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 justify-items-center gap-[25px]">
     
-            @for (item of movieList; track $index) {
+            @for (item of viewMovieList; track $index) {
                 <div class="w-full"> 
                     <app-movie-card [movieId]="item.id"
                         [movieTitle]="item.title" 
-                        [movieDescription]="item.description" 
-                        [movieImg]="item.img" 
-                        [movieIcon]="item.icon"
+                        [movieDate]="item.release_date | date:'longDate'" 
+                        [movieImg]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" 
                         movieRouterLink = "/movie/">
                     </app-movie-card>
+                </div>
+            }
+            @empty {
+                <div class="col-span-4 text-[20px]">
+                    <h1>Nenhum filme listado</h1>
                 </div>
             }
            
@@ -26,8 +28,15 @@
 
 </div>
 
-<div class="my-[36px]">
-    <app-common-button (click)="loadMore()"></app-common-button>
+<div class="flex justify-center mt-[24px]">
+
+    <app-common-button (click)="loadMoreMovies()" buttonClass="bg-blue-600 hover:bg-blue-900 text-white font-bold py-3 px-6">
+        <ng-container commonButton>
+            <span>Ver mais</span>
+            <img src="/assets/arrow-down.svg" class="ml-[5px] size-[20px]" alt="arrow-down">
+        </ng-container>
+    </app-common-button>
+    
 </div>
 
 

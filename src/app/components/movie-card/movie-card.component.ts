@@ -9,11 +9,17 @@ import { RouterLink } from '@angular/router';
 })
 export class MovieCardComponent {
 
+  svgFill: boolean = false;
+
   @Input() movieId: number = 0;
   @Input() movieTitle: string = "";
-  @Input() movieDescription: string = "";
+  @Input() movieDate: string | null = "";
   @Input() movieImg: string = "";
   @Input() movieIcon: string = "";
   @Input() movieRouterLink: string = "";
+
+  fillSvg(): void {
+    this.svgFill = !this.svgFill;
+  }
  
 }

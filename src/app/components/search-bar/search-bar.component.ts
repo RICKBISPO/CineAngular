@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MoviesService } from '../../services/movies.service';
-import { Movie } from '../../models/movie';
 
 @Component({
   selector: 'app-search-bar',
@@ -9,24 +8,21 @@ import { Movie } from '../../models/movie';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements AfterViewInit {
 
-  searchValue: string = "";
+  searchedValue: string = "";
 
-  @Input() breakpoint = 0;
-  @Output() searchedMovies = new EventEmitter<Array<Movie>>;
+  @ViewChild('searchBarInput') searchBarInput!: ElementRef;
 
   constructor(private moviesService: MoviesService) { }
 
-  searchMovies()  {
-    if (this.searchValue !== "") {
-      this.searchedMovies.emit(
-        this.moviesService.findByTitle(this.searchValue, this.breakpoint)
-      );
-    } else {
-      this.searchedMovies.emit(
-        new Array<Movie>
-      );
+  ngAfterViewInit(): void {
+    this.searchBarInput.nativeElement.focus();
+  }
+
+  inputSearchedValue(): void  {
+    if (this.searchedValue.length >= 3 || this.searchedValue === "") {
+      this.moviesService.searchedMoviesSubject$.next(this.searchedValue);
     }
   }
 

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Movie } from '../../models/movie';
+import { MovieDetails } from '../../models/movieDetails';
 
 @Component({
   selector: 'app-details-overview-movie',
@@ -7,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './details-overview-movie.component.scss'
 })
 export class DetailsOverviewMovieComponent {
+
+  @Input() movieDetails!: MovieDetails;
 
 }
