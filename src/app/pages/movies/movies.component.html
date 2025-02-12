@@ -1,17 +1,13 @@
-<div class="ml-[46px] mr-[54px]">
+<div class="h-full ml-[46px] mr-[54px] text-black">
 
     <app-breadcrumb 
-    [pagePathDisable]="[
-        { path: 'Início', link: '/' }
-    ]"
+    [pagePathDisable]="[{ path: 'sidenav.home' | translate, link: '/' }]"
 
-    [pagePathActive]="
-    { path: 'Filmes', link: '/movies' }
-    "
+    [pagePathActive]="{ path: 'sidenav.movies' | translate, link: '/' }"
     />
 
-    <div class="text-[36px] mt-[10px] dark:text-white font-bold">
-        Filmes
+    <div class="text-[36px] font-bold py-[1%]">
+        {{ 'sidenav.movies' | translate }}
     </div>
 
     <app-search-bar></app-search-bar>

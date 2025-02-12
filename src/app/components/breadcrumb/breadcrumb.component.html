@@ -1,5 +1,5 @@
-<div>
-    <div class="text-gray-600 dark:text-gray-50">
+<div class="pt-4">
+    <div class="text-gray-600">
         @for (item of pagePathDisable; track $index) {
             <a [routerLink]="item.link">
                 <span class="hover:underline">{{ item.path }}</span>

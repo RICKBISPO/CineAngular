@@ -1,17 +1,15 @@
-<div class="ml-[46px] mr-[54px]">
+<div class="h-full ml-[46px] mr-[54px] text-black pb-10">
 
     <app-breadcrumb 
     [pagePathDisable]="[
-        { path: 'Início', link: '/' },
-        { path: 'Filmes', link: '/movies' }
+        { path: 'sidenav.home' | translate, link: '/' },
+        { path: 'sidenav.movies' | translate, link: '/movies' }
     ]"
 
-    [pagePathActive]="
-    { path: movieDetails.movie.title, link: '/movie/' + movieDetails.movie.id}
-    "
+    [pagePathActive]="{ path: movieDetails.movie.title, link: '/movie/' + movieDetails.movie.id}"
     />
 
-    <div class="text-[32px] font-bold py-[1%] dark:text-white">
+    <div class="text-[32px] font-bold py-[1%]">
         {{ movieDetails.movie.title }}
     </div>
 
@@ -21,6 +19,8 @@
         <app-details-cast-movie class="lg:col-span-2 md:col-span-1" [movieDetails]="movieDetails"></app-details-cast-movie>
     
         <app-details-overview-movie class="lg:col-span-2 md:col-span-1" [movieDetails]="movieDetails"></app-details-overview-movie>
+
+        <app-details-review-movie class="lg:col-span-3 md:col-span-1" [movieDetails]="movieDetails"></app-details-review-movie>
     </div>
 
 </div>

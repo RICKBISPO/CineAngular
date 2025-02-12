@@ -9,5 +9,6 @@ import { Component, Input } from '@angular/core';
 export class CommonButtonComponent {
 
   @Input() buttonClass: string = "";
+  @Input() buttonType: string = "";
 
 }

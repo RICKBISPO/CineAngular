@@ -20,24 +20,27 @@ export class MoviesService {
   };
 
   public getPopularMovies(
-    page: number
+    page: number,
+    language: string
   ): Observable<{ results: Movie[] }> {
 
     const params = new HttpParams()
-      .set('language', 'pt-BR')
+      .set('language', language)
       .set('page', page);
 
-    return this.http.get<{ results: Movie[] }>(`${this.apiUrl}/popular`, {
+    return this.http.get<{ results: Movie[] }>(`${this.apiUrl}/top_rated`, {
       params: params,
       headers: this.defaultHeaders,
     });
   }
 
   public getMovieDetails(
-    id: number
+    id: number,
+    language: string
   ): Observable<Movie> {
     
-      const params = new HttpParams().set('language', 'pt-BR');
+      const params = new HttpParams()
+        .set('language', language);
     
       return this.http.get<Movie>(`${this.apiUrl}/${id}`, {
         params: params,
@@ -56,11 +59,12 @@ export class MoviesService {
   }
 
   public getMovieCredits(
-    id: number
+    id: number,
+    language: string
   ): Observable<Credits> { 
   
     const params = new HttpParams()
-      .set('language', 'pt-BR');
+      .set('language', language);
   
     return this.http.get<Credits>(`${this.apiUrl}/${id}/credits`, {
       params: params,

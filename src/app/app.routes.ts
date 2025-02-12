@@ -4,6 +4,7 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
 import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ConfigurationsComponent } from './pages/configurations/configurations.component';
 
 export const routes: Routes = [
     
@@ -23,6 +24,10 @@ export const routes: Routes = [
             {
                 path:'movie/:id',
                 component: MovieDetailsComponent
+            },
+            {
+                path:'config',
+                component: ConfigurationsComponent
             }
         ]
     },

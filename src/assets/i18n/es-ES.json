@@ -1,0 +1,47 @@
+{
+  "home": {
+    "welcome": "¡Bienvenido! a"
+  },
+  "sidenav": {
+    "home": "Inicio",
+    "movies": "Películas",
+    "config": "Configuraciones",
+    "exit": "Salir"
+  },
+  "configurations": {
+    "theme": "Definir tema",
+    "language": "Definir idioma"
+  },
+  "movie": {
+    "seeMore": "Ver más",
+    "close": "Cerrar",
+    "listedMovies": "Película(s) listada(s)",
+    "notFoundMovie": "No hay películas listadas",
+    "searchBarPlaceholder": "Buscar una película",
+    "details": {
+      "cast": "Elenco",
+      "overview": "Sinopsis",
+      "directedBy": "Dirigido por",
+      "watchedDate": "Fecha vista",
+      "reviews": "Reseñas",
+      "addReview": "Añadir",
+      "rating": "Calificación",
+      "name": "Nombre",
+      "namePlaceholder": "Introduce tu nombre aquí",
+      "reviewContent": "Comentario",
+      "reviewContentPlaceholder": "Introduce tu comentario aquí",
+      "submit": "Enviar",
+      "errors": {
+        "watchedAfterDateError": "La fecha no puede ser posterior al día de hoy",
+        "watchedDateError": "Rellene el campo anterior",
+        "ratingError": "Seleccione una calificación",
+        "nameError": "Rellene el campo anterior, mínimo 3 letras",
+        "reviewContentError": "Rellene el campo anterior, mínimo 10 letras"
+      }
+    }
+  },
+  "notFound": {
+    "pageNotFound": "Página no encontrada",
+    "goBackToHome": "Volver al inicio"
+  }
+}

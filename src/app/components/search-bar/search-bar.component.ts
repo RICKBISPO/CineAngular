@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MoviesService } from '../../services/movies.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-bar',
-  imports: [FormsModule],
+  imports: [FormsModule, TranslatePipe],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'
 })

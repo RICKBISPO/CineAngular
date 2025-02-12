@@ -1,0 +1,47 @@
+{
+  "home": {
+    "welcome": "Welcome to"
+  },
+  "sidenav": {
+    "home": "Home",
+    "movies": "Movies",
+    "config": "Settings",
+    "exit": "Exit"
+  },
+  "configurations": {
+    "theme": "Set Theme",
+    "language": "Set Language"
+  },
+  "movie": {
+    "seeMore": "See More",
+    "close": "Close",
+    "listedMovies": "Listed Movie(s)",
+    "notFoundMovie": "No movie listed",
+    "searchBarPlaceholder": "Search for a movie",
+    "details": {
+      "cast": "Cast",
+      "overview": "Overview",
+      "directedBy": "Directed by",
+      "watchedDate": "Date Watched",
+      "reviews": "Reviews",
+      "addReview": "Add",
+      "rating": "Rating",
+      "name": "Name",
+      "namePlaceholder": "Enter your name here",
+      "reviewContent": "Review",
+      "reviewContentPlaceholder": "Enter your review here",
+      "submit": "Submit",
+      "errors": {
+        "watchedAfterDateError": "The date cannot be later than today",
+        "watchedDateError": "Fill in the field above",
+        "ratingError": "Select a rating",
+        "nameError": "Fill in the field above, minimum 3 characters",
+        "reviewContentError": "Fill in the field above, minimum 10 characters"
+      }
+    }
+  },
+  "notFound": {
+    "pageNotFound": "Page Not Found",
+    "goBackToHome": "Go Back to Home"
+  }
+}
