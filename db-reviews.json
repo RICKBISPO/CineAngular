@@ -35,15 +35,6 @@
       "reviewContent": "O filme tem seus momentos, mas a história ficou um pouco fraca no geral.",
       "reviewDate": "2025-02-12T12:00:00Z",
       "watchedDate": "2025-02-11T19:00:00Z"
-    },
-    {
-      "id": "10ee",
-      "movieId": 240,
-      "author": "Henrique",
-      "rating": "8",
-      "reviewContent": "Filme bom, gostei",
-      "reviewDate": "2025-02-12T14:57:51.378Z",
-      "watchedDate": "2025-02-12"
     }
   ]
 }

@@ -16,6 +16,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ModalComponent } from '../modal/modal.component';
 import { LanguageService } from '../../services/language.service';
 import moment from 'moment';
+import { AlertComponent } from '../alert/alert.component';
 
 
 @Component({
@@ -26,7 +27,8 @@ import moment from 'moment';
     FormsModule, 
     CommonModule, 
     TranslatePipe,
-    ModalComponent
+    ModalComponent,
+    AlertComponent
   ],
   templateUrl: './details-review-movie.component.html',
   styleUrl: './details-review-movie.component.scss'
@@ -37,6 +39,10 @@ export class DetailsReviewMovieComponent implements OnInit {
   alertAll: boolean = false;
   formReview: FormGroup;
   reviews: Array<Review> = new Array<Review>;
+  showAlert = { 
+    value: false,
+    type: ""  
+  };
 
   @Input() movieDetails!: MovieDetails;
 
@@ -72,10 +78,22 @@ export class DetailsReviewMovieComponent implements OnInit {
       watchedDate: this.formReview.value.watchedDate,
     };
 
-    if (!this.formReview.invalid && !this.validatorDate(this.formReview.value.watchedDate)) {
+    if (this.formReview.valid && this.validatorDate(this.formReview.value.watchedDate)) {
       this.apiService.sendReview(review).subscribe({
         next: () => {
           this.setReviewsList(); 
+          this.showAlert.value = true;
+          this.showAlert.type = "success";
+          setTimeout(() => {
+            this.showAlert.value = false;
+          }, 2000);
+        },
+        error: () => {
+          this.showAlert.value = true;
+          this.showAlert.type = "error";
+          setTimeout(() => {
+            this.showAlert.value = false;
+          }, 2000);
         }
       }); 
       
@@ -95,8 +113,9 @@ export class DetailsReviewMovieComponent implements OnInit {
 
   validatorDate(date: string): boolean {
     const actualDate = moment();
-    const d = moment(date);
-    return d.isAfter(actualDate);
-  }
+    const releaseDate =  moment(this.movieDetails.movie.release_date);
+    const dateMoment = moment(date);
 
+    return actualDate.isAfter(dateMoment) && dateMoment.isAfter(releaseDate);
+  }
 }

@@ -30,8 +30,6 @@
                     <p>{{ item.reviewContent }}</p>
                 </div>
 
-                <!-- <hr class="text-gray-800 my-2"> -->
-
                 <div class="flex justify-start items-center text-[14px] text-gray-500">
                     <p c>{{ item.reviewDate  | date:'longDate' : '' : languageValue }}</p> 
                 </div>
@@ -59,7 +57,7 @@
                     (alertAll && this.formReview.get('watchedDate')?.invalid)) {
                     <p class="text-red-700">{{ 'movie.details.errors.watchedDateError' | translate }}</p>
                     }
-                    @if (validatorDate(this.formReview.get('watchedDate')?.value)) {
+                    @if (!validatorDate(this.formReview.get('watchedDate')?.value) && this.formReview.get('watchedDate')?.touched) {
                     <p class="text-red-700">{{ 'movie.details.errors.watchedAfterDateError' | translate }}</p>
                     }
 
@@ -116,7 +114,6 @@
                 (alertAll && this.formReview.get('reviewContent')?.invalid)) {
                 <p class="text-red-700">{{ 'movie.details.errors.reviewContentError' | translate }}</p>
                 }
-
             </div>
 
             <div class="flex justify-end mt-1 p-2">
@@ -126,7 +123,43 @@
                     </ng-container>
                 </app-common-button>
             </div>
-
         </form>
     </ng-container>
 </app-modal>
+
+@if (showAlert.value) {
+    <div class="fixed bottom-4 left-4">
+        <app-alert [alertClass]="'alert-' + showAlert.type">
+            <ng-container alertContent>
+                @if (showAlert.type === "success") {
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 shrink-0 stroke-current"
+                    fill="none"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{{ 'movie.details.alert.addReviewAlert' | translate }}</span>
+                }
+                @else {
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 shrink-0 stroke-current"
+                    fill="none"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{{ 'movie.details.alert.errorReviewAlert' | translate }}</span>
+                }
+            </ng-container>
+        </app-alert>
+    </div>
+}

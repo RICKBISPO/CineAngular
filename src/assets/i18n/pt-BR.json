@@ -31,8 +31,12 @@
       "reviewContent": "Comentário",
       "reviewContentPlaceholder": "Digite seu comentário aqui",
       "submit": "Enviar",
+      "alert": {
+        "addReviewAlert": "Avaliação adicionada",
+        "errorReviewAlert": "Erro ao adicionar avaliação"
+      },
       "errors": {
-        "watchedAfterDateError": "A data não pode ser posterior ao dia de hoje",
+        "watchedAfterDateError": "Insira uma data válida",
         "watchedDateError": "Preencha o campo acima",
         "ratingError": "Selecione uma nota",
         "nameError": "Preencha o campo acima, mínimo 3 letras",

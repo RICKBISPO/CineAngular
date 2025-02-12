@@ -31,8 +31,12 @@
       "reviewContent": "Review",
       "reviewContentPlaceholder": "Enter your review here",
       "submit": "Submit",
+      "alert": {
+        "addReviewAlert": "Review added",
+        "errorReviewAlert": "Error adding review"
+      },
       "errors": {
-        "watchedAfterDateError": "The date cannot be later than today",
+        "watchedAfterDateError": "Enter a valid date",
         "watchedDateError": "Fill in the field above",
         "ratingError": "Select a rating",
         "nameError": "Fill in the field above, minimum 3 characters",
