@@ -14,11 +14,13 @@ import { LanguageService } from '../../services/language.service';
 })
 export class LanguageSelectorComponent implements AfterViewInit {
 
-  selectedValue: string = '';
+  selectedValue: string = "";
   actualLanguage: Language | undefined = undefined;
   languages: Array<Language>;
 
-  constructor(private languageService: LanguageService) {
+  constructor(
+    private languageService: LanguageService
+  ) {
     this.languages = this.languageService.getLanguages;
   }
 

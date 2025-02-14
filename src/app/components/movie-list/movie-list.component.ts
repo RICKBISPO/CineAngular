@@ -33,15 +33,11 @@ export class MovieListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.languageService.languageSubject$.subscribe({
-      next: (lang) => {
-        this.moviesService.getPopularMovies(this.page, lang).subscribe({
-          next: (res) => {
-            this.movieList = res.results;
-            this.viewMovieList = this.movieList;
-            this.setListedMovies(this.movieList.length);
-          },
-        });
+    this.moviesService.getPopularMovies(this.page, this.languageValue).subscribe({
+      next: (res) => {
+        this.movieList = res.results;
+        this.viewMovieList = this.movieList;
+        this.setListedMovies(this.movieList.length);
       },
     });
   }
@@ -63,15 +59,11 @@ export class MovieListComponent implements OnInit, AfterViewInit {
 
   loadMoreMovies(): void {
     this.page += 1;
-    this.languageService.languageSubject$.subscribe({
-      next: (lang) => {
-        this.moviesService.getPopularMovies(this.page, lang).subscribe({
-          next: (res) => {
-            this.movieList = [...this.movieList, ...res.results];
-            this.viewMovieList = this.movieList;
-            this.setListedMovies(this.movieList.length);
-          },
-        });
+    this.moviesService.getPopularMovies(this.page, this.languageValue).subscribe({
+      next: (res) => {
+        this.movieList = [...this.movieList, ...res.results];
+        this.viewMovieList = this.movieList;
+        this.setListedMovies(this.movieList.length);
       },
     });
   }

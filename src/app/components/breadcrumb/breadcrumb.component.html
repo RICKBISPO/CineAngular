@@ -1,13 +1,17 @@
-<div class="pt-4">
-    <div class="text-gray-600">
-        @for (item of pagePathDisable; track $index) {
-            <a [routerLink]="item.link">
-                <span class="hover:underline">{{ item.path }}</span>
-                <span> - </span>
-            </a>
-        }
-        <a [routerLink]="pagePathActive.link">
-            <span class="font-bold hover:underline">{{ pagePathActive.path }}</span>
-        </a>
+<div class="pt-4 ml-[46px]">
+    <div class="flex items-center text-gray-600">
+        @for (item of pagePaths; track $index) {
+            @if ($index.valueOf() === pagePaths.length - 1) {
+                <a [routerLink]="item.link">
+                    <span class="hover:underline font-bold">{{ item.path | translate }}</span>
+                </a>  
+            }
+            @else {
+                <a [routerLink]="item.link">
+                    <span class="hover:underline">{{ item.path | translate }}</span>
+                    <span class="px-2">-</span>
+                </a>  
+            }
+        }  
     </div>
 </div>

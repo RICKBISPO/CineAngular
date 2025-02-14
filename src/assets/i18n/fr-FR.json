@@ -1,6 +1,9 @@
 {
   "home": {
-    "welcome": "Bienvenue! à"
+    "createList": "Crée ta liste de films",
+    "createListDescription": "Sauvegarde tes films préférés et reste informé de tous les détails",
+    "viewMovies": "Voir les films",
+    "favoriteMovies": "Tes films préférés"
   },
   "sidenav": {
     "home": "Accueil",

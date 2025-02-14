@@ -1,14 +1,5 @@
 <div class="h-full ml-[46px] mr-[54px] text-black pb-10">
 
-    <app-breadcrumb 
-    [pagePathDisable]="[
-        { path: 'sidenav.home' | translate, link: '/' },
-        { path: 'sidenav.movies' | translate, link: '/movies' }
-    ]"
-
-    [pagePathActive]="{ path: movieDetails.movie.title, link: '/movie/' + movieDetails.movie.id}"
-    />
-
     <div class="text-[32px] font-bold py-[1%]">
         {{ movieDetails.movie.title }}
     </div>

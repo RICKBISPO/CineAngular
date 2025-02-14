@@ -1,0 +1,37 @@
+{
+  "reviews": [
+    {
+      "id": "1",
+      "movieId": 238,
+      "author": "João Silva",
+      "rating": 4,
+      "reviewContent": "filme ótimo, com efeitos visuais incríveis e uma boa dose de Drama.",
+      "reviewDate": "2025-02-10T14:30:00Z",
+      "watchedDate": "2025-02-09T20:00:00Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "img": "/assets/profile-img.png",
+      "username": "Henrique Bispo"
+    }
+  ],
+  "favoriteMovies": [
+    {
+      "id": "0827",
+      "userId": 1,
+      "movieId": 389
+    },
+    {
+      "id": "5e90",
+      "userId": 1,
+      "movieId": 19404
+    },
+    {
+      "id": "c5bf",
+      "userId": 1,
+      "movieId": 278
+    }
+  ]
+}

@@ -17,6 +17,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { LanguageService } from '../../services/language.service';
 import moment from 'moment';
 import { AlertComponent } from '../alert/alert.component';
+import { ShowAlert } from '../../models/showAlert';
 
 
 @Component({
@@ -39,11 +40,7 @@ export class DetailsReviewMovieComponent implements OnInit {
   alertAll: boolean = false;
   formReview: FormGroup;
   reviews: Array<Review> = new Array<Review>;
-  showAlert = { 
-    value: false,
-    type: ""  
-  };
-
+  showAlert: ShowAlert = { value: false, type: "" };
   @Input() movieDetails!: MovieDetails;
 
   constructor(
@@ -69,12 +66,11 @@ export class DetailsReviewMovieComponent implements OnInit {
   }
 
   onSubmit() {
-    const review: Review = {
+    const review = {
       movieId: this.movieDetails.movie.id,
       author: this.formReview.value.name,
       rating: this.formReview.value.rating,
       reviewContent: this.formReview.value.reviewContent,
-      reviewDate: new Date().toISOString(),
       watchedDate: this.formReview.value.watchedDate,
     };
 
@@ -118,4 +114,5 @@ export class DetailsReviewMovieComponent implements OnInit {
 
     return actualDate.isAfter(dateMoment) && dateMoment.isAfter(releaseDate);
   }
+  
 }

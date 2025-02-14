@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AvatarComponent } from "../avatar/avatar.component";
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -11,7 +12,17 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class SidenavComponent {
 
-  constructor(private router: Router) {}
+  username: string = "";
+  userImg: string = "";
+
+  constructor(private router: Router, private apiService: ApiService) {
+    this.apiService.getUserById(1).subscribe({
+      next: (user) => { 
+        this.username = user.username
+        this.userImg = user.img
+      }
+    });
+  }
 
   isActive(): boolean {
     return this.router.url.includes('/movie') ;

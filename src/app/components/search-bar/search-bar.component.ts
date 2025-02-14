@@ -15,7 +15,9 @@ export class SearchBarComponent implements AfterViewInit {
 
   @ViewChild('searchBarInput') searchBarInput!: ElementRef;
 
-  constructor(private moviesService: MoviesService) { }
+  constructor(
+    private moviesService: MoviesService
+  ) { }
 
   ngAfterViewInit(): void {
     this.searchBarInput.nativeElement.focus();
