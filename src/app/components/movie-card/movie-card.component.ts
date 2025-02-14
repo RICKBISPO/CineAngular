@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ApiService } from '../../services/api.service';
+import { FavoriteMovieService } from '../../services/favorite-movie.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -9,6 +9,7 @@ import { ApiService } from '../../services/api.service';
   styleUrl: './movie-card.component.scss',
 })
 export class MovieCardComponent {
+
   svgFill: boolean = false;
   @Input() movieId: number = 0;
   @Input() movieTitle: string = '';
@@ -18,8 +19,10 @@ export class MovieCardComponent {
   @Input() movieRouterLink: string = '';
   @Output() movieDeleted: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private apiService: ApiService) {
-    this.apiService.getFavoriteMoviesByUserId(1).subscribe({
+  constructor(
+    private favoriteMovieService: FavoriteMovieService
+  ) {
+    this.favoriteMovieService.getFavoriteMoviesByUserId(1).subscribe({
       next: (favoriteMovies) => {
         if (
           favoriteMovies.find((fav) => fav.movieId === this.movieId) !==
@@ -33,21 +36,21 @@ export class MovieCardComponent {
 
   fillSvg(): void {
     if (!this.svgFill) {
-      this.apiService
-        .sendFavoriteMovie({ userId: 1, movieId: this.movieId })
+      this.favoriteMovieService
+        .createFavoriteMovie({ userId: 1, movieId: this.movieId })
         .subscribe({
           next: () => {
             this.svgFill = true;
           },
         });
     } else {
-      this.apiService.getFavoriteMoviesByUserId(1).subscribe({
+      this.favoriteMovieService.getFavoriteMoviesByUserId(1).subscribe({
         next: (favoriteMovies) => {
           const favoriteMovie = favoriteMovies.find(
             (fav) => fav.movieId === this.movieId
           );
           if (favoriteMovie !== undefined) {
-            this.apiService.deleteFavoriteMovie(favoriteMovie.id).subscribe({
+            this.favoriteMovieService.deleteFavoriteMovie(favoriteMovie.id).subscribe({
               next: () => {
                 this.svgFill = false;
                 this.movieDeleted.emit();
@@ -58,4 +61,5 @@ export class MovieCardComponent {
       });
     }
   }
+  
 }

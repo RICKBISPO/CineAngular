@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MoviesService } from '../../services/movies.service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -16,7 +16,7 @@ export class SearchBarComponent implements AfterViewInit {
   @ViewChild('searchBarInput') searchBarInput!: ElementRef;
 
   constructor(
-    private moviesService: MoviesService
+    private movieService: MovieService
   ) { }
 
   ngAfterViewInit(): void {
@@ -25,7 +25,7 @@ export class SearchBarComponent implements AfterViewInit {
 
   inputSearchedValue(): void  {
     if (this.searchedValue.length >= 3 || this.searchedValue === "") {
-      this.moviesService.searchedMoviesSubject$.next(this.searchedValue);
+      this.movieService.searchedMoviesSubject$.next(this.searchedValue);
     }
   }
 

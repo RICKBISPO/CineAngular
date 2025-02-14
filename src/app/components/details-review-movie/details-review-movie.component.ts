@@ -9,7 +9,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../services/api.service';
 import { Review } from '../../models/review';
 import { MovieDetails } from '../../models/movieDetails';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -18,6 +17,7 @@ import { LanguageService } from '../../services/language.service';
 import moment from 'moment';
 import { AlertComponent } from '../alert/alert.component';
 import { ShowAlert } from '../../models/showAlert';
+import { ReviewService } from '../../services/review.service';
 
 
 @Component({
@@ -44,7 +44,7 @@ export class DetailsReviewMovieComponent implements OnInit {
   @Input() movieDetails!: MovieDetails;
 
   constructor(
-    private apiService: ApiService,
+    private reviewService: ReviewService,
     private languageService: LanguageService
   ) {
     this.formReview = new FormGroup({
@@ -75,7 +75,7 @@ export class DetailsReviewMovieComponent implements OnInit {
     };
 
     if (this.formReview.valid && this.validatorDate(this.formReview.value.watchedDate)) {
-      this.apiService.sendReview(review).subscribe({
+      this.reviewService.createReview(review).subscribe({
         next: () => {
           this.setReviewsList(); 
           this.showAlert.value = true;
@@ -102,7 +102,7 @@ export class DetailsReviewMovieComponent implements OnInit {
   }
 
   setReviewsList() {
-    this.apiService.getReviewByMovieId(this.movieDetails.movie.id).subscribe({
+    this.reviewService.getReviewsByMovieId(this.movieDetails.movie.id).subscribe({
       next: (reviews) => this.reviews = reviews
     });
   }

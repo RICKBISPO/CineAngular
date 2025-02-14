@@ -7,8 +7,8 @@ import { DatePipe } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
 import { CommonButtonComponent } from "../../components/common-button/common-button.component";
 import { RouterLink } from '@angular/router';
-import { MoviesService } from '../../services/movies.service';
-import { ApiService } from '../../services/api.service';
+import { FavoriteMovieService } from '../../services/favorite-movie.service';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-home',
@@ -22,10 +22,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   viewMovieList: Array<Movie> = new Array<Movie>;
 
   constructor(
-    private moviesService: MoviesService,
+    private movieService: MovieService,
     private breadcrumbService: BreadcrumbService, 
     private languageService: LanguageService,
-    private apiService: ApiService
+    private favoriteMovieService: FavoriteMovieService
   ) {
     this.languageService.languageSubject$.subscribe({
       next: (lang) => {
@@ -44,11 +44,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   loadFavoriteMovies() {
     this.viewMovieList = new Array<Movie>;
-    this.apiService.getFavoriteMoviesByUserId(1).subscribe({
+    this.favoriteMovieService.getFavoriteMoviesByUserId(1).subscribe({
       next: (favoriteMovies) => {  
                 
         favoriteMovies.forEach((fav) => {
-          this.moviesService.getMovieDetails(fav.movieId, this.languageValue).subscribe({
+          this.movieService.getMovieDetails(fav.movieId, this.languageValue).subscribe({
             next: (movie) => {     
               this.viewMovieList.push(movie);
             },

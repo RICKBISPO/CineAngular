@@ -8,6 +8,15 @@
       "reviewContent": "filme ótimo, com efeitos visuais incríveis e uma boa dose de Drama.",
       "reviewDate": "2025-02-10T14:30:00Z",
       "watchedDate": "2025-02-09T20:00:00Z"
+    },
+    {
+      "id": "11a8",
+      "movieId": 278,
+      "author": "Henrique Bispo",
+      "rating": "5",
+      "reviewContent": "Nunca assisti esse filme, mas é bom\n",
+      "watchedDate": "2025-02-13",
+      "reviewDate": "2025-02-14T17:23:55.995Z"
     }
   ],
   "users": [
@@ -19,19 +28,19 @@
   ],
   "favoriteMovies": [
     {
-      "id": "0827",
-      "userId": 1,
-      "movieId": 389
-    },
-    {
-      "id": "5e90",
-      "userId": 1,
-      "movieId": 19404
-    },
-    {
       "id": "c5bf",
       "userId": 1,
       "movieId": 278
+    },
+    {
+      "id": "e875",
+      "userId": 1,
+      "movieId": 238
+    },
+    {
+      "id": "b961",
+      "userId": 1,
+      "movieId": 240
     }
   ]
 }

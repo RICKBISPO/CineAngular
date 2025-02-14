@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Movie } from '../../models/movie';
-import { MoviesService } from '../../services/movies.service';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { CommonButtonComponent } from '../common-button/common-button.component';
 import { DatePipe } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -22,7 +22,7 @@ export class MovieListComponent implements OnInit, AfterViewInit {
   listedMovies: string = "00";
 
   constructor(
-    private moviesService: MoviesService,
+    private movieService: MovieService,
     private languageService: LanguageService
   ) {
     this.languageService.languageSubject$.subscribe({
@@ -33,7 +33,7 @@ export class MovieListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.moviesService.getPopularMovies(this.page, this.languageValue).subscribe({
+    this.movieService.getTopRatedMovies(this.page, this.languageValue).subscribe({
       next: (res) => {
         this.movieList = res.results;
         this.viewMovieList = this.movieList;
@@ -43,7 +43,7 @@ export class MovieListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.moviesService.searchedMoviesSubject$.subscribe({
+    this.movieService.searchedMoviesSubject$.subscribe({
       next: (searchValue) => {
         if (searchValue !== '') {
           this.viewMovieList = this.movieList.filter((movie) =>
@@ -59,7 +59,7 @@ export class MovieListComponent implements OnInit, AfterViewInit {
 
   loadMoreMovies(): void {
     this.page += 1;
-    this.moviesService.getPopularMovies(this.page, this.languageValue).subscribe({
+    this.movieService.getTopRatedMovies(this.page, this.languageValue).subscribe({
       next: (res) => {
         this.movieList = [...this.movieList, ...res.results];
         this.viewMovieList = this.movieList;

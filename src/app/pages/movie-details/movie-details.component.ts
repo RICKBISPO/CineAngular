@@ -4,12 +4,12 @@ import { DetailsCastMovieComponent } from '../../components/details-cast-movie/d
 import { DetailsOverviewMovieComponent } from '../../components/details-overview-movie/details-overview-movie.component';
 import { ActivatedRoute } from '@angular/router';
 import { MovieDetails } from '../../models/movieDetails';
-import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../../models/movie';
 import { Credits } from '../../models/credits';
 import { LanguageService } from '../../services/language.service';
 import { DetailsReviewMovieComponent } from "../../components/details-review-movie/details-review-movie.component";
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -31,7 +31,7 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
-    private moviesService: MoviesService,
+    private movieService: MovieService,
     private languageService: LanguageService,
     private breadcrumbService: BreadcrumbService
   ) { 
@@ -66,7 +66,7 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit {
   }
 
   setMovie(movieId: number) {
-    this.moviesService.getMovieDetails(movieId, this.languageValue).subscribe({
+    this.movieService.getMovieDetails(movieId, this.languageValue).subscribe({
       next: (res) => { 
         this.movie = res;
         this.movieDetails.movie = this.movie;
@@ -75,7 +75,7 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit {
   }
 
   setCredits(movieId: number) {
-    this.moviesService.getMovieCredits(movieId, this.languageValue).subscribe({
+    this.movieService.getMovieCredits(movieId, this.languageValue).subscribe({
       next: (res) => { 
         this.credits = res;
         this.movieDetails.credits = this.credits;

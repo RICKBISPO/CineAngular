@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AvatarComponent } from "../avatar/avatar.component";
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ApiService } from '../../services/api.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -15,8 +15,11 @@ export class SidenavComponent {
   username: string = "";
   userImg: string = "";
 
-  constructor(private router: Router, private apiService: ApiService) {
-    this.apiService.getUserById(1).subscribe({
+  constructor(
+    private router: Router, 
+    private userService: UserService
+  ) {
+    this.userService.getUserById(1).subscribe({
       next: (user) => { 
         this.username = user.username
         this.userImg = user.img
